@@ -135,11 +135,17 @@ def file_glob glob
   files
 end
 
-def markdown folder_to_glob
-  unless File.exist?(folder_to_glob) && File.readable?(folder_to_glob) &&
-    File.directory?(folder_to_glob)
-    raise "#{folder_to_glob} is not an existing readable directory"
+def validate_dir dir
+  unless File.exist?(dir) && File.readable?(dir) &&
+    File.directory?(dir)
+    raise "#{dir} is not an existing readable directory"
   end
+  dir
+end
+
+def markdown opts={}
+  folder_to_glob = validate_dir opts[:glob]
+  output_folder = validate_dir opts[:output]
 
   data = ''
 
@@ -178,7 +184,9 @@ def markdown folder_to_glob
     data += "\n\n" + markdown + "\n\n"
   end
 
-  File.open('./source/index.md', 'w') do |f|
+  index_file = File.expand_path(File.join(output_folder, 'index.md'))
+
+  File.open(index_file, 'w') do |f|
     f.write header + data
   end
 end
