@@ -117,15 +117,13 @@ def pwd
   File.expand_path Dir.pwd
 end
 
-# Glob for files relative to Dir.pwd
+# Glob for files. Directories are skipped
 #
 # @param glob [String] glob to Dir.glob
 #
 # @return [Array<String>] the globbed files
 def file_glob glob
   files = []
-
-  glob = File.expand_path File.join(pwd, glob)
 
   Dir.glob(glob) do |markdown_file|
     next if File.directory? markdown_file
