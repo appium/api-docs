@@ -41,7 +41,8 @@ end
 # @return [String]
 def process_github_links markdown, markdown_file_path
   # links can be multiline so search entire markdown
-  markdown.gsub(/[^!] \[ ( [^\[]* ) \] \( ( [^)\/]+ ) \)/mx) do |full|
+  # (?<!!) -- negative look behind. don't match if this is an image link. ![]
+  markdown.gsub(/(?<!!) \[ ( [^\[]* ) \] \( ( [^)\/]+ ) \)/mx) do |full|
     result = full
 
     link_text   = $1
@@ -49,10 +50,16 @@ def process_github_links markdown, markdown_file_path
 
     if link_target && !link_target.include?('/')
       ext = File.extname link_target
+      no_ext = "No extension on #{full.strip} in #{markdown_file_path.strip}"
+
+      exit_with no_ext if ext.empty?
+
+      # If a link has a has, use that. Otherwise link to the start of the file.
+      ext, hash = ext.split '#'
       if ext == '.md'
-        result = " [#{link_text}](##{link_target.strip})"
-      elsif ext.empty? && !link_target.include?('#')
-        exit_with "No extension on #{full.strip} in #{markdown_file_path.strip}"
+        result = " [#{link_text}](##{hash || link_target.strip})"
+      elsif ext.empty?
+        exit_with no_ext
       end
     end
 
