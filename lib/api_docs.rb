@@ -69,6 +69,7 @@ end
 
 def order_files files
   order = %w(
+README.md
 intro.md
 
 platform-support.md
