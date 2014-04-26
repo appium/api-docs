@@ -1,0 +1,14 @@
+/* Fix rendering of large tables */
+.content table td:first-child code {
+  white-space: nowrap;
+}
+
+.content table {
+  margin-right: 0%;
+  background-color: #eaf2f6;
+}
+
+/* size logo correctly */
+.tocify-wrapper > img {
+  width: 100%
+}
