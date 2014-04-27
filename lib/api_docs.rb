@@ -78,8 +78,11 @@ end
 
 # process docs/en/filename.md#testing links
 # handle relative links [getting started](../../README.md)
+# handle absolute sample code links [example](/sample-code/java/sample.java)
 def trim_link link_target
   link_target = link_target.strip if link_target
+
+  return "https://github.com/appium/appium/tree/1.0-beta#{link_target}" if link_target.start_with?('/sample-code/')
   return link_target if link_target.end_with?('/')
   # trim doc and relative
   trim = link_target.start_with?('docs/') || link_target.start_with?('../')
