@@ -21,6 +21,151 @@ toc_footers:
 ---
 
 
+# <span id="README.md"></span>Appium
+
+
+> Appium is an open source, cross-platform test automation tool for native, hybrid and mobile web apps, tested on simulators (iOS, FirefoxOS), emulators (Android), and real devices (iOS, Android, FirefoxOS).
+
+[![NPM version](https://badge.fury.io/js/appium.png)](https://npmjs.org/package/appium)
+[![Build Status](https://api.travis-ci.org/appium/appium.png?branch=master)](https://travis-ci.org/appium/appium)
+[![Dependency Status](https://gemnasium.com/appium/appium.png)](https://gemnasium.com/appium/appium)
+
+
+## Supported Platforms
+
+* iOS
+* Android
+* FirefoxOS
+
+See the [platform support doc](#platform-support.md) for more detailed information.
+
+## Why Appium?
+
+1. You don't have to recompile your app or modify it in any way, due
+   to use of standard automation APIs on all platforms.
+2. You can write tests with your favorite dev tools using any [WebDriver](https://code.google.com/p/selenium/wiki/JsonWireProtocol)-compatible
+   language such as Java, [Objective-C](https://github.com/appium/selenium-objective-c),
+   JavaScript with Node.js (in both [callback](https://github.com/admc/wd) and [yield-based](https://github.com/jlipps/yiewd) flavors),
+   PHP, Python, [Ruby](https://github.com/appium/ruby_lib), C#, Clojure, or Perl
+   with the Selenium WebDriver API and language-specific client libraries.
+3. You can use any testing framework.
+
+Investing in the [WebDriver](https://code.google.com/p/selenium/wiki/JsonWireProtocol) protocol means you are betting on a single, free and open protocol for testing that has become a defacto standard. Don't lock yourself into a proprietary stack.
+
+If you use Apple's UIAutomation library without Appium you can only write tests
+using JavaScript and you can only run tests through the Instruments application.
+Similarly, with Google's UiAutomator you can only write tests in Java. Appium
+opens up the possibility of true cross-platform native mobile automation. Finally!
+
+## I don't get it yet...
+
+If you're new to Appium, or want a fuller description of what this is all about, please read our [Introduction to Appium Concepts](#intro.md).
+
+## Requirements
+
+Your environment needs to be setup for the particular mobile platforms that you
+want to run tests on. See below for particular platform requirements.
+
+If you want to run Appium via an `npm install`, hack with or contribute to Appium, you will need
+[node.js and npm](http://nodejs.org) 0.8 or greater (`brew install node`: make sure you have not installed Node or Appium with `sudo`, otherwise you'll likely run into problems). We recommend the latest stable version.
+
+To verify that all of Appium's dependencies are met you can use `appium-doctor`.
+Run `appium-doctor` and supply the `--ios` or `--android` flags to verify that all
+of the dependencies are set up correctly. If running from source, you may have to use
+`bin/appium-doctor.js` or `node bin/appium-doctor.js`.
+
+### iOS Requirements
+
+* Mac OS X 10.7 or higher, 10.8.4 recommended
+* XCode &gt;= 4.6.3
+* Apple Developer Tools (iPhone simulator SDK, command line tools)
+* [Ensure you read our documentation on setting yourself up for iOS testing!](#running-on-osx.md)
+
+### Android Requirements
+
+* [Android SDK](http://developer.android.com) API &gt;= 17 (Additional features require 18)
+* Appium supports Android on OS X, Linux and Windows. Make sure you follow the
+  directions for setting up your environment properly for testing on different OSes:
+  * [linux](#running-on-linux.md)
+  * [osx](#running-on-osx.md)
+  * [windows](#running-on-windows.md)
+
+### FirefoxOS Requirements
+
+* [Firefox OS Simulator](https://developer.mozilla.org/en/docs/Tools/Firefox_OS_Simulator)
+
+## Quick Start
+
+Kick up an Appium server, and then run a test written in your favorite [WebDriver](https://code.google.com/p/selenium/wiki/JsonWireProtocol)-compatible language!
+You can run an Appium server using node.js or using the application, see below.
+
+### Using Node.js
+
+    $ npm install -g appium
+    $ appium &
+
+### Using the App
+
+* [Download the Appium app](https://github.com/appium/appium/releases)
+* Run it!
+
+## Writing Tests for Appium
+
+The main guide for getting started writing and running tests is [the running tests](#running-tests.md) doc, which includes explanations for iOS, Android, and Android older devices. If you're interested in testing on physical hardware, you might be interested in our [real devices guide](#real-devices.md).
+
+Essentially, we support a subset of the [Selenium WebDriver JSON Wire Protocol](https://code.google.com/p/selenium/wiki/JsonWireProtocol), and extend it so that you can specify mobile-targeted [desired capabilities](#caps.md) to run your test through Appium.
+
+You find elements by using a subset of WebDriver's element-finding strategies.
+See [finding elements](#finding-elements.md) for detailed information. We also have several extensions to the JSON Wire Protocol for [automating mobile gestures](#gestures.md) like tap, flick, and swipe.
+
+You can also automate web views in hybrid apps! See the [hybrid app guide](#hybrid.md)
+
+This repository contains [many examples of tests in a variety of different languages](https://github.com/appium/appium/tree/1.0-beta/sample-code/examples)!
+
+For the full list of Appium doc pages, visit [this directory](#).
+
+## How It Works
+
+Appium drives various native automation frameworks and provides an API based on
+Selenium's [WebDriver JSON wire protocol](https://code.google.com/p/selenium/wiki/JsonWireProtocol).
+
+Appium drives Apple's UIAutomation library for iOS support, which is based on
+[Dan Cuellar's](http://github.com/penguinho) work on iOS Auto.
+
+Android support uses the UiAutomator framework for newer platforms and
+[Selendroid](http://github.com/DominikDary/selendroid) for older Android platforms.
+
+FirefoxOS support leverages [Marionette](https://developer.mozilla.org/en-US/docs/Marionette),
+an automation driver that is compatible with WebDriver and is used to automate
+Gecko-based platforms.
+
+## Contributing
+
+Please take a look at our [contribution documentation](#CONTRIBUTING.md)
+for instructions on how to build, test and run Appium from source.
+
+## Project Credits & Inspiration
+
+[Credits](#credits.md)
+
+## Mailing List
+
+Announcements and debates often take place on the [Discussion Group](https://groups.google.com/d/forum/appium-discuss), be sure to sign up!
+
+## Troubleshooting
+
+We put together a [troubleshooting guide](#troubleshooting.md).
+Please have a look here first if you run into any problems. It contains instructions for checking a lot
+of common errors and how to get in touch with the community if you're stumped.
+
+## Using Robots
+
+Using Appium with [Tapster](https://github.com/hugs/tapsterbot) and other robots is possible,
+check out the [Appium Robots](https://github.com/appium/robots) project!
+
+
+
+
 # <span id="intro.md"></span>Introduction to Appium
 
 
@@ -29,10 +174,10 @@ mobile web, and mobile hybrid applications on iOS and Android platforms.
 "Mobile native apps" are those written using the iOS or Android SDKs. "Mobile
 web apps" are web apps accessed using a mobile browser (Appium supports
 Safari on iOS and Chrome on Android). "Mobile hybrid apps" have a native
-wrapper around a "webview" -- a native control that enables interaction with
+wrapper around a "webview"--a native control that enables interaction with
 web content. Projects like [Phonegap](http://phonegap.com/), for example,
 make it easy to build apps using web technologies that are then bundled into
-a native wrapper -- these are hybrid apps.
+a native wrapper---these are hybrid apps.
 
 Importantly, Appium is "cross-platform": it allows you to write tests against
 multiple platforms (iOS, Android), using the same API. This enables a large
@@ -70,7 +215,7 @@ same app you're shipping. The vendor-provided frameworks we use are:
 We meet requirement #2 by wrapping the vendor-provided frameworks in one API,
 the [WebDriver](http://docs.seleniumhq.org/projects/webdriver/) API.
 WebDriver (aka "Selenium WebDriver") specifies a client-server protocol
-(known as the [JSON Wire Protocol](https://code.google.com/p/selenium/wiki/JsonWireProtocol).
+(known as the [JSON Wire Protocol](https://code.google.com/p/selenium/wiki/JsonWireProtocol)).
 Given this client-server architecture, a client written in any language can
 be used to send the appropriate HTTP requests to the server. There are
 already clients written in every popular programming language. This also
@@ -85,7 +230,7 @@ standard for automating web browsers, and is a [W3C Working Draft](https://dvcs.
 Why do something totally different for mobile? Instead we have [extended the protocol](https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile)
 with extra API methods useful for mobile automation.
 
-It should be obvious that requirement #4 is a given -- you're reading this
+It should be obvious that requirement #4 is a given---you're reading this
 because [Appium is open source](https://github.com/appium/appium).
 
 ## Appium Concepts
@@ -98,13 +243,14 @@ the command execution. The fact that we have a client/server architecture
 opens up a lot of possibilities: we can write our test code in any language
 that has a client. We can put the server on a different machine than our
 tests are running on. We can write test code and rely on a cloud service
-like [Sauce Labs](https://saucelabs.com/mobile) to receive and interpret the commands.
+like [Sauce Labs](https://saucelabs.com/mobile) to receive and interpret the
+commands.
 
 *Session*
 Automation is always performed in the context of a session. Clients initiate
 a session with a server in ways specific to each library,
 but they all end up sending a `POST /session` request to the server,
-with a JSON object called  the 'desired capabilities' object. At this point
+with a JSON object called the 'desired capabilities' object. At this point
 the server will start up the automation session and respond with a session ID
 which can be used in sending further commands.
 
@@ -134,7 +280,7 @@ very handy when writing tests!
 ## Getting Started
 
 Congratulations! You are now armed with enough knowledge to begin using
-Appium. Why not head back to the [getting started doc](#getting-started.md) for
+Appium. Why not head back to the [getting started doc](#README.md) for
 more detailed requirements and instructions?
 
 
@@ -149,15 +295,13 @@ make explicit the level of support and requirements for each of these.
 
 ## iOS Support
 
-See [Running on OS X: iOS](#running-on-osx.md) for iOS requirements and setup
-instructions.
+See [Running on OS X: iOS](#running-on-osx.md) for iOS requirements and setup instructions.
 
 * Versions: 6.1, 7.0, and 7.1
 * Devices: iPhone Simulator, iPad Simulator, and real iPhones and iPads
 * Native app support: Yes, with debug version of .app (simulator),
   or correctly-signed .ipa (real devices). Underlying support is provided by
-  Apple's [UIAutomation](https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/_index.html)
-  framework.
+  Apple's [UIAutomation](https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/_index.html) framework.
 * Mobile web support: Yes, via automation of mobile Safari. For real devices,
   ios-webkit-remote-debugger is required, and automation of native aspects of
   the Safari interface is not possible. See the [mobile web doc](#mobile-web.md) for instructions.
@@ -170,18 +314,17 @@ instructions.
 
 ## Android Support
 
-See [Running on OS X: Android](#running-on-osx.md), [Running on Windows](#running-on-windows.md), or [Running on Linux](#running-on-linux.md) for Android requirements and setup
-instructions.
+See [Running on OS X: Android](#android), [Running on Windows](#running-on-windows.md), or [Running on Linux](#running-on-linux.md) for Android requirements and setup instructions.
 
 * Versions: 2.3 and up
   * Versions 4.2 and up are supported via Appium's own [UiAutomator](http://developer.android.com/tools/help/uiautomator/index.html)
     libraries. This is the default automation backend.
-  * Versions 2.3 through 4.3 are supported via Appium's bundled version of
-    [Selendroid](http://selendroid.io), which utilizes [Instrumentation](http://developer.android.com/reference/android/app/Instrumentation.html).
-    Selendroid has a different set of commands than the default Appium (though
-    this is rapidly being minimized) and a different support profile. To
-    access this automation backend, use the `automationName` capability with
-    the value `Selendroid`.
+  * Versions 2.3 through 4.3 are supported via Appium's bundled version of [Selendroid](http://selendroid.io),
+    which utilizes [Instrumentation](http://developer.android.com/reference/android/app/Instrumentation.html).
+    Selendroid has a different set of commands than the default Appium
+    (though this is rapidly being minimized) and a different support profile.
+    To access this automation backend, use the `automationName` capability
+    with the value `Selendroid`.
 * Devices: Android emulators and real Android devices
 * Native app support: Yes
 * Mobile web support: Yes (but not when using Selendroid backend). Automation
@@ -197,9 +340,8 @@ instructions.
   using the Selendroid backend)
 * Support for automating multiple devices simultaneously: Yes,
   though Appium must be started using different ports for the server
-   parameters `--port`, `--bootstrap-port` (or `--selendroid-port`) and/or
-  `--chromedriver-port`. See the [server args doc](#server-args.md) for more
-  information on these parameters.
+  parameters `--port`, `--bootstrap-port` (or `--selendroid-port`) and/or
+  `--chromedriver-port`. See the [server args doc](#server-args.md) for more information on these parameters.
 * Support for automating vendor-provided or third-party apps: Yes (but not
   when using the Selendroid backend)
 
@@ -214,7 +356,7 @@ Appium has support for real device testing.
 To get started on a real device, you will need the following:
 
 1. An Apple Developer ID and a valid Developer Account with a configured
-distribution certificate and provisioning profile.
+   distribution certificate and provisioning profile.
 2. An iPad or iPhone.
 3. The source code of your app.
 4. A Mac with XCode and the XCode Command Line Developer Tools
@@ -236,7 +378,7 @@ are no problems.
 Once your device and app are configured, you can run tests on that device by
 passing the -U flag to the server, and passing the bundle ID (if the app is
 installed on the device) or the path to the .ipa file via the `--app` flag or
- the `app` desired capability:
+the `app` desired capability:
 
 ```
 node . -U <UDID> --app <bundle_id>
@@ -247,7 +389,7 @@ This will start Appium and have Appium use the device to test the app.
 ## Troubleshooting ideas
 
 0. Make sure UDID is correct by checking it in xcode organizer or itunes. It
-   is a long string (20+ chars)
+is a long string (20+ chars)
 0. Make sure that you can run your tests against simulator
 0. Double check that you can invoke your automation from instruments.
 0. Make sure instruments in closed already
@@ -309,7 +451,8 @@ To go back to iOS 7.0 testing.
 
 * Make sure you have the [Android SDK installed](http://developer.android.com/sdk/index.html).
 * Make sure you have Android SDK API &gt;= 17 installed. To do this, run the
-  Android SDK Manager (`android`) and select the API in the extra packages you can install.
+  Android SDK Manager (`android`) and select the API in the extra packages
+  you can install.
 * Make sure you have `ant` installed. Ant is used to build the Appium bootstrap
   jar as well as the test applications. Mac OS X Mavericks no longer comes
   pre-packaged with `ant` so you will need to [download and install it](http://ant.apache.org/bindownload.cgi).
@@ -319,9 +462,10 @@ To go back to iOS 7.0 testing.
 
         export ANDROID_HOME="/usr/local/adt/sdk"
 
-* Make sure you have [Maven 3.1.1](http://maven.apache.org/download.cgi)
-  or newer installed (`mvn`). We need Maven for Selendroid support,
-  which helps Appium run on Android versions below 4.2.
+* Make sure you have [Maven 3.0.5](http://maven.apache.org/download.cgi)
+  installed (`mvn`). Maven 3.1.1 will _not_ work!
+  We need Maven for Selendroid support, which helps Appium run on Android
+  versions below 4.2.
 * Make sure you have an AVD set to a recent Android version (one that can run
   UIAutomator. Just choose the latest Android OS). You can create an AVD by
   using the android SDK tools. Remember the name you give the AVD, so that you
@@ -413,8 +557,7 @@ you have an API Level 17 or greater API installed. You will also need Ant to
 build the bootstrap jar that Appium uses for testing Android.
 
 Finally, set `$ANDROID_HOME` to be your Android SDK path. If you unzipped the
-Android SDK to /usr/local/adt/, for example, you should add this to your
-shell startup:
+Android SDK to /usr/local/adt/, for example, you should add this to your shell startup:
 
     export ANDROID_HOME="/usr/local/adt/sdk"
 
@@ -429,8 +572,7 @@ line using node.js:
 
     node .
 
-See the [server documentation](#server-args.md) for all the command line
-arguments.
+See the [server documentation](#server-args.md) for all the command line arguments.
 
 ## Notes
 
@@ -468,7 +610,7 @@ want to zip it up, you can.
 
 The best way to see what to do currently is to look at the example tests:
 
-[Node.js](https://github.com/appium/appium/tree/master/sample-code/examples/node) | [Python](https://github.com/appium/appium/tree/master/sample-code/examples/python) | [PHP](https://github.com/appium/appium/tree/master/sample-code/examples/php) | [Ruby](https://github.com/appium/appium/tree/master/sample-code/examples/ruby) | [Java](https://github.com/appium/appium/tree/master/sample-code/examples/java)
+[Node.js](https://github.com/appium/appium/tree/1.0-beta/sample-code/examples/node) | [Python](https://github.com/appium/appium/tree/1.0-beta/sample-code/examples/python) | [PHP](https://github.com/appium/appium/tree/1.0-beta/sample-code/examples/php) | [Ruby](https://github.com/appium/appium/tree/1.0-beta/sample-code/examples/ruby) | [Java](https://github.com/appium/appium/tree/1.0-beta/sample-code/examples/java)
 
 Basically, first make sure Appium is running:
 
@@ -478,9 +620,9 @@ Then script your WebDriver test, sending in the following desired capabilities:
 
 ```js
 {
-    platformName: 'iOS',
-    platformVersion: '6.1',
-    deviceName: 'iPhone Simulator',
+    device: 'iPhone Simulator',
+    browserName: '',
+    version: '6.1',
     app: myApp
 }
 ```
@@ -501,8 +643,9 @@ First, make sure you have one and only one Android emulator or device
 connected. If you run `adb devices`, for example, you should see one device
 connected. This is the device Appium will use for tests. Of course, to have
 a device connected, you'll need to have made an Android AVD (see system
-setup  [Windows](#running-on-windows.md), [Mac](#running-on-osx.md),
-or [Linux](#running-on-linux.md))
+setup ([Windows](#running-on-windows.md),
+[Mac](#running-on-osx.md),
+or [Linux](#running-on-linux.md)
 for more information). If the Android SDK tools are on your path, you can
 simply run:
 
@@ -522,10 +665,12 @@ Then script your WebDriver test, sending in the following desired capabilities:
 
 ```js
 {
-    platformName: 'Android',
-    platformVersion: '4.2',
-    deviceName: 'Android Emulator',
-    app: myApp
+    device: 'Android',
+    browserName: '',
+    version: '4.2',
+    app: myApp,
+    'app-package': myAppPackage,
+    'app-activity': myAppActivity
 }
 ```
 
@@ -533,6 +678,12 @@ In this set of capabilities, `myApp` must be either:
 
 * A local absolute path to your .apk or a .zip of it
 * A url of a zip file containg your .apk
+
+`myAppPackage` must be the java package of your application, e.g.,
+`com.example.android.myApp`.
+
+`myAppActivity` must be the Android activity you want to launch for the test,
+e.g., `MainActivity`.
 
 Using your WebDriver library of choice, set the remote session to use these
 capabilities and connect to the server running at port 4723 of localhost (or
@@ -549,17 +700,16 @@ Appium comes bundled with another automation backend called [Selendroid]
 (http://selendroid.io/).
 
 To use Selendroid, all that is required is to slightly change the set of
-desired capabilities mentioned above, by adding the `automationName` capability
-and specifying the Selendroid automation backend.
+desired capabilities mentioned above, by replacing 'Android' with 'Selendroid':
 
 ```js
 {
-    automationName: 'Selendroid',
-    platformName: 'Android',
-    platformVersion: '2.3',
-    deviceName: 'Android Emulator',
+    device: 'Selendroid',
+    browserName: '',
     version: '2.3',
-    app: myApp
+    app: myApp,
+    'app-package': myAppPackage,
+    'app-activity': myAppActivity
 }
 ```
 
@@ -698,7 +848,7 @@ public class MyInstrumentation extends Instrumentation {
 }
 ```
 
-## Coverage Reports
+### Reports
 
 `ant instrument` generates a `coverage.em` file. The `mobile :endCoverage`
 will download the coverage.ec file for that particular run. Note that you can
@@ -715,8 +865,7 @@ will download the coverage.ec file for that particular run. Note that you can
 
 Usage: `node . [flags]`
 
-## Server flags
-
+### Server flags
 All flags are optional, but some are required in conjunction with certain others.
 
 |Flag|Default|Description|Example|
@@ -728,6 +877,7 @@ All flags are optional, but some are required in conjunction with certain others
 |`-U`, `--udid`|null|Unique device identifier of the connected physical device|`--udid 1adsf-sdfas-asdf-123sdf`|
 |`-a`, `--address`|0.0.0.0|IP Address to listen on|`--address 0.0.0.0`|
 |`-p`, `--port`|4723|port to listen on|`--port 4723`|
+|`-dp`, `--device-port`|4724|**DEPRECATED** (Android-only) port to use on device to talk to Appium. Use --bootstrap-port instead|`--device-port 4724`|
 |`-bp`, `--bootstrap-port`|4724|(Android-only) port to use on device to talk to Appium|`--bootstrap-port 4724`|
 |`-k`, `--keep-artifacts`|false|(IOS-only) Keep Instruments trace directories||
 |`-r`, `--backend-retries`|3|(iOS-only) How many times to retry launching Instruments before saying it crashed or timed out|`--backend-retries 3`|
@@ -736,12 +886,13 @@ All flags are optional, but some are required in conjunction with certain others
 |`--no-reset`|false|Don't reset app state between sessions (IOS: don't delete app plist files; Android: don't uninstall app before new session)||
 |`-l`, `--pre-launch`|false|Pre-launch the application before allowing the first session (Requires --app and, for Android, --app-pkg and --app-activity)||
 |`-lt`, `--launch-timeout`|90000|(iOS-only) how long in ms to wait for Instruments to launch||
-|`-g`, `--log`|null|Also send log output to this file|`--log /path/to/appium.log`|
+|`-g`, `--log`|null|Log output to this file instead of stdout|`--log /path/to/appium.log`|
 |`--log-timestamp`|false|Show timestamps in console output||
 |`--log-no-colors`|false|Don't use colors in console output||
 |`-G`, `--webhook`|null|Also send log output to this HTTP listener|`--webhook localhost:9876`|
 |`--native-instruments-lib`|false|(IOS-only) IOS has a weird built-in unavoidable delay. We patch this in appium. If you do not want it patched, pass in this flag.||
-|`--force-quit-instruments`, `-fqi`|false|Run the watcher process that will force-kill an unresponsive instruments||
+|`--merciful`, `-m`|true|**DEPRECATED** Don't run the watcher process that will force-kill an unresponsive instruments||
+|`--not-merciful`, `-nm`|false|Run the watcher process that will force-kill an unresponsive instruments||
 |`--app-pkg`|null|(Android-only) Java package of the Android app you want to run (e.g., com.example.android.myApp)|`--app-pkg com.example.android.myApp`|
 |`--app-activity`|null|(Android-only) Activity name for the Android activity you want to launch from your package (e.g., MainActivity)|`--app-activity MainActivity`|
 |`--app-wait-package`|false|(Android-only) Package name for the Android activity you want to wait for (e.g., com.example.android.myApp)|`--app-wait-package com.example.android.myApp`|
@@ -787,36 +938,33 @@ All flags are optional, but some are required in conjunction with certain others
 
 |Capability|Description|Values|
 |----|-----------|-------|
-|`automationName`|Which automation engine to use|`Appium` (default) or `Selendroid`|
-|`platformName`|Which mobile OS platform to use|`iOS`, `Android`, or `FirefoxOS`|
-|`platformVersion`|Mobile OS version|e.g., `7.1`, `4.4`|
-|`deviceName`|The kind of mobile device or emulator to use|`iPhone Simulator`, `iPad Simulator`, `iPhone Retina 4-inch`, `Android Emulator`, `Galaxy S4`, etc...|
-|`app`|The absolute local path _or_ remote http URL to an `.ipa` or `.apk` file, or a `.zip` containing one of these. Appium will attempt to install this app binary on the appropriate device first. Note that this capability is not required for Android if you specify `appPackage` and `appActivity` capabilities (see below). Incompatible with `browserName`.|`/abs/path/to/my.apk` or `http://myapp.com/app.ipa`|
-|`browserName`|Name of mobile web browser to automate. Should be an empty string if automating an app instead.|'Safari' for iOS and 'Chrome', 'Chromium', or 'Browser' for Android|
+|`app`|The absolute local path _or_ remote http URL to an `.ipa` or `.apk` file, or a `.zip` containing one of these. Appium will attempt to install this app binary on the appropriate device first. Can also be one of `chrome` or `chromium` to launch Chrome or Chromium on Android, or `safari` to launch Mobile Safari on iOS. Note that this capability is not required for Android if you specify `app-package` and `app-activity` capabilities (see below).|`/abs/path/to/my.apk` or `http://myapp.com/app.ipa`, `chrome`, `chromium` on Android, `safari` on iOS|
+|`browserName`|(for Selenium compatibility)|should always be `''`; this exists because some clients require it to be sent|
+|`device`|The kind of mobile device or emulator to use|`iphone`, `ipad`, `selendroid`, `firefoxos`, `android` |
+|`version`|Android API version, iOS Version|(Android) 4.2/4.3 (iOS) 6.0/6.1/7.0|
 |`newCommandTimeout`|How long (in seconds) Appium will wait for a new command from the client before assuming the client quit and ending the session|e.g. `60`|
-|`autoLaunch`|Whether to have Appium install and launch the app automatically. Default `true`|`true`, `false`|
+|`launch`|Whether to have Appium install and launch the app automatically. Default `true`|`true`, `false`|
 
-### Android Only
+## Android Only
 
 |Capability|Description|Values|
 |----|-----------|-------|
-|`appActivity`| Activity name for the Android activity you want to launch from your package|`MainActivity`, `.Settings`|
-|`appPackage`| Java package of the Android app you want to run|`com.example.android.myApp`, `com.android.settings`|
-|`appWaitActivity`| Activity name for the Android activity you want to wait for|`SplashActivity`|
-|`appWaitPackage`| Java package of the Android app you want to wait for|`com.example.android.myApp`, `com.android.settings`|
-|`deviceReadyTimeout`| Timeout in seconds while waiting for device to become ready|`5`|
+|`app-activity`| Activity name for the Android activity you want to launch from your package|`MainActivity`, `.Settings`|
+|`app-package`| Java package of the Android app you want to run|`com.example.android.myApp`, `com.android.settings`|
+|`app-wait-activity`| Activity name for the Android activity you want to wait for|`SplashActivity`|
+|`device-ready-timeout`| Timeout in seconds while waiting for device to become ready|`5`|
 |`compressXml`| [setCompressedLayoutHeirarchy(true)](http://developer.android.com/tools/help/uiautomator/UiDevice.html#setCompressedLayoutHeirarchy%28boolean%29)| `true`|
 |`androidCoverage`| Fully qualified instrumentation class. Passed to -w in adb shell am instrument -e coverage true -w | `com.my.Pkg/com.my.Pkg.instrumentation.MyInstrumentation`|
 |`enablePerformanceLogging`| (Chrome and webview only) Enable Chromedriver's performance logging (default `false`)| `true`, `false`|
 |`avdLaunchTimeout`| How long to wait in milliseconds for an avd to launch and connect to ADB (default `120000`)| `300000`|
 |`avdReadyTimeout`| How long to wait in milliseconds for an avd to finish its boot animations (default `120000`)| `300000`|
 
-
-### iOS Only
+## iOS Only
 
 |Capability|Description|Values|
 |----|-----------|-------|
 |`calendarFormat`| (Sim-only) Calendar format to set for the iOS Simulator|e.g. `gregorian`|
+|`deviceName`| (Sim-only) name of the device to set for the iOS Simulator|e.g. `iPhone Retina (3.5-inch)`|
 |`bundleId`| Bundle ID of the app under test. Useful for starting an app on a real device or for using other caps which require the bundle ID during test startup|e.g. `io.appium.TestApp`|
 |`language`| (Sim-only) Language to set for the iOS Simulator|e.g. `fr`|
 |`launchTimeout`| Amount of time in ms to wait for instruments before assuming it hung and failing the session|e.g. `20000`|
@@ -825,7 +973,7 @@ All flags are optional, but some are required in conjunction with certain others
 |`locationServicesAuthorized`| (Sim-only) Set location services to be authorized or not authorized for app via plist, so that location services alert doesn't pop up. Default is to keep current sim setting. Note that if you use this setting you MUST also use the `bundleId` capability to send in your app's bundle ID.|`true` or `false`|
 |`autoAcceptAlerts`| Accept iOS privacy access permission alerts (e.g., location, contacts, photos) automatically if they pop up. Default is false.|`true` or `false`|
 |`nativeInstrumentsLib`| Use native intruments lib (ie disable instruments-without-delay).|`true` or `false`|
-|`nativeWebTap`| (Sim-only) Enable "real", non-javascript-based web taps in Safari. Default: `false`. Warning: depending on viewport size/ratio this might not accurately tap an element|`true` or `false`|
+|`nonSyntheticWebClick`| (Sim-only) Enable/Disable non synthetic web clicks in Safari.|`true` or `false`|
 |`safariAllowPopups`| (Sim-only) Allow javascript to open new windows in Safari. Default keeps current sim setting|`true` or `false`|
 |`safariIgnoreFraudWarning`| (Sim-only) Prevent Safari from showing a fraudulent website warning. Default keeps current sim setting.|`true` or `false`|
 |`safariOpenLinksInBackground`| (Sim-only) Whether Safari should allow links to open in new windows. Default keeps current sim setting.|`true` or `false`|
@@ -868,9 +1016,9 @@ https://github.com/appium/appium-uiauto/blob/master/uiauto/lib/mechanic.js#L30
 There's a known issue with table cell elements becoming invalidated before
 there's time to interact with them. We're working on a fix
 
-## Examples
+### Examples
 
-### Find all the UIAButtons on the screen
+## Find all the UIAButtons on the screen
 
 WD.js:
 
@@ -904,7 +1052,7 @@ Python:
 [button.click() for button in driver.find_elements_by_tag_name('button')]
 ```
 
-### Find the element with the text (or accessibilityIdentifier) "Go"
+## Find the element with the text (or accessibilityIdentifier) "Go"
 
 WD.js:
 
@@ -928,7 +1076,7 @@ Python:
 driver.find_element_by_name('Go').click()
 ```
 
-### Find the nav bar text element where the text begins with "Hi, "
+## Find the nav bar text element where the text begins with "Hi, "
 
 WD.js:
 
@@ -947,7 +1095,7 @@ Ruby:
 @driver.find_element :xpath, '//navigationBar/text[contains(@value, "Hi, ")]'
 ```
 
-### Find an element by tagName
+## Find an element by tagName
 
 Java:
 
@@ -967,7 +1115,7 @@ Python:
 driver.find_elements_by_tag_name('tableCell')[5].click()
 ```
 
-### Using the "-ios uiautomation" locator strategy
+## Using the "-ios uiautomation" locator strategy
 
 WD.js:
 
@@ -975,12 +1123,25 @@ WD.js:
 driver.element('-ios uiautomation', '.elements()[1].cells()[2]').getAttribute('name');
 ```
 
-### Using the "-android uiautomator" locator strategy
+## Using the "-android uiautomator" locator strategy
 
 WD.js:
 
 ```js
 driver.element('-android uiautomator', 'new UiSelector().clickable(true)').getAttribute('name');
+```
+
+## FindAndAct
+
+If you want, you can find and act on an element in a single command (iOS-only).
+For example, you can find and click on an element in one call to Appium,
+using a special `mobile: findAndAct` command.
+
+Python:
+
+```python
+args = {'strategy': 'tag_name', 'selector': 'button', 'action': 'tap'}
+driver.execute_script("mobile: findAndAct", args)
 ```
 
 ### Pull to refresh using a swipe gesture
@@ -989,9 +1150,11 @@ Python:
 
 ```python
 js_snippet = "mobile: swipe"
-args = {'startX':0.5, 'startY':0.2, 'startX':0.5, 'startY':0.95, 'tapCount':1, 'duration':10}
+args = {'startX':0.5, 'startY':0.2, 'endX':0.5, 'endY':0.95, 'tapCount':1, 'duration':10}
 driver.execute_script(js_snippet, args)
 ```
+
+Note: driver.execute_script() is explained in [Automating Mobile Gestures: Alternative access method](#alternative-access-method)
 
 ## Using The Appium Inspector To Locate Elements
 
@@ -1001,14 +1164,14 @@ you're looking for without leaving the Appium app. With the Appium Inspector
 it's name by either clicking the element on the preview page provided,
 or locating it in the UI navigator.
 
-### Overview
+## Overview
 
 The Appium inspector has a simple layout, complete with a UI navigator,
 a preview, and record and refresh buttons, and interaction tools.
 
 ![Step 1](https://raw.github.com/appium/appium/master/assets/InspectorImages/Overview.png)
 
-### Example
+## Example
 
 After launching the Appium Inspector (you can do this by clicking the small
 "i" button in the top right of the app) you can locate any element in the
@@ -1158,7 +1321,7 @@ params as described above.
 
 In these examples, note that the element parameter is always optional.
 
-## Tap
+### Tap
 
 * **WD.js:**
 
@@ -1227,7 +1390,7 @@ coords.Add("y", 12);
 driver.ExecuteScript("mobile: tap", coords);
 ```
 
-## Flick
+### Flick
 
 * **WD.js:**
 
@@ -1254,7 +1417,7 @@ flickObject.put("touchCount", 2);
 js.executeScript("mobile: flick", flickObject);
 ```
 
-## Swipe
+### Swipe
 
 *Note*: Swiping is unfortunately broken in iOS7, because of a bug in Apple's
 frameworks. For iOS7, see `mobile: scroll` as a workaround that works for most
@@ -1289,7 +1452,7 @@ swipeObject.put("duration", 1.8);
 js.executeScript("mobile: swipe", swipeObject);
 ```
   
-## Scroll
+### Scroll
 
 * **WD.js:**
 
@@ -1310,7 +1473,7 @@ scrollObject.put("element", ((RemoteWebElement) element).getId());
 js.executeScript("mobile: scroll", scrollObject);
 ```
 
-## Slider
+### Slider
  
 **iOS**
  
@@ -1342,7 +1505,7 @@ it is recommended to write tests that focus on minimum, 50%, and maximum.
 # 50%
 slider.click
 ```
-## Set orientation
+### Set orientation
 
 * **WD.js:**
 
@@ -1358,7 +1521,7 @@ driver.setOrientation("LANDSCAPE", function(err) {
 driver.orientation = "LANDSCAPE"
 ```
 
-## Scroll To
+### Scroll To
 
 ```ruby
   b = @driver.find_element :name, 'Sign In'
@@ -1373,7 +1536,7 @@ scrollToObject.put("element",((RemoteWebElement) element).getId());
 js.executeScript("mobile: scrollTo", scrollToObject);
 ```
 
-## longTap
+### longTap
  
  * **c#**
  
@@ -1411,10 +1574,10 @@ You are able to register your appium server with a local grid by using the
 
 In the node config file you have to define the **"browserName"**,
 **"version"** and **"platform"** and based on these parameters the grid
-will re-direct your test to the right device. You will also need to
-configure you **host** details and the **selenium grid** details. For
-a full list of all parameters and descriptions look
-[here](http://code.google.com/p/selenium/source/browse/java/server/src/org/openqa/grid/common/defaults/GridParameters.properties)
+ will re-direct your test to the right device. You will also need to
+ configure you **host** details and the **selenium grid** details. For
+ a full list of all parameters and descriptions look
+ [here](http://code.google.com/p/selenium/source/browse/java/server/src/org/openqa/grid/common/defaults/GridParameters.properties)
 
 Once you start the appium server and it registers with the grid,
 you will see your device on the grid console page:
@@ -1467,28 +1630,31 @@ your app to test it. In line with that methodology, it is possible to test
 hybrid web apps (e.g., the "UIWebView" elements in an iOS app) the same* way
 you can with Selenium for web apps. There is a bit of technical complexity
 required so that Appium knows whether you want to automate the native aspects
-of the app or the web views, but thankfully, we can stay within the
-WebDriver protocol for everything.
+ of the app or the web views, but thankfully, we can stay within the
+ WebDriver protocol for everything.
+
+*  [Hybrid iOS apps](#automating-hybrid-ios-apps)
+*  [Hybrid Android apps](#automating-hybrid-android-apps)
 
 ## Automating hybrid iOS apps
 
 Here are the steps required to talk to a web view in your Appium test:
 
 1.  Navigate to a portion of your app where a web view is active
-1.  Call [GET session/:sessionId/contexts](https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile)
-1.  This returns a list of contexts we can access, like 'NATIVE_APP' or 'WEBVIEW_1'
-1.  Call [POST session/:sessionId/context](https://code.google.com/p/selenium/source/browse/spec-draft.md?repo=mobile)
-    with the id of the context you want to access
+1.  Call [GET session/:sessionId/window_handles](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/window_handles)
+1.  This returns a list of web view ids we can access
+1.  Call [POST session/:sessionId/window](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/window)
+with the id of the web view you want to access
 1.  (This puts your Appium session into a mode where all commands are
-    interpreted as being intended for automating the web view,
-    rather than the native portion of the app. For example,
-    if you run getElementByTagName, it will operate on the DOM of the web
-    view, rather than return UIAElements. Of course,
-    certain WebDriver methods only make sense in one context or another,
-    so in the wrong context you will receive an error message).
+interpreted as being intended for automating the web view,
+rather than the native portion of the app. For example,
+if you run getElementByTagName, it will operate on the DOM of the web view,
+rather than return UIAElements. Of course, certain WebDriver methods only
+make sense in one context or another, so in the wrong context you will
+receive an error message).
 1.  To stop automating in the web view context and go back to automating the
-    native portion of the app, simply call `context` again with the native
-    context id to leave the web frame.
+native portion of the app, simply call `"mobile: leaveWebView"` with
+execute_script to leave the web frame.
 
 ## Execution against a real iOS device
 
@@ -1531,10 +1697,10 @@ Once installed you can start the proxy with the following command:
 > ios_webkit_debug_proxy -c 0e4b2f612b65e98c1d07d22ee08678130d345429:27753 -d
 ``` 
 
-**NOTE:** the proxy requires the **"web inspector"** to be turned on to
-allow a connection to be established. Turn it on by going to **settings >
-safari > advanced**. Please be aware that the web inspector was **added as
-part of iOS 6** and was not available previously.
+**NOTE:** the proxy requires the **"web inspector"** to be turned on to allow
+a connection to be established. Turn it on by going to ** settings > safari >
+advanced **. Please be aware that the web inspector was **added as part of
+iOS 6** and was not available previously.
 
 ## Wd.js Code example
 
@@ -1542,13 +1708,13 @@ part of iOS 6** and was not available previously.
   // assuming we have an initialized `driver` object working on the UICatalog app
   driver.elementByName('Web, Use of UIWebView', function(err, el) { // find button to nav to view
     el.click(function(err) { // nav to UIWebView
-      driver.contexts(function(err, contexts) { // get list of available views
-        driver.context(contexts[1], function(err) { // choose what is probably the webview context
+      driver.windowHandles(function(err, handles) { // get list of available views
+        driver.window(handles[0], function(err) { // choose the only available view
           driver.elementsByCss('.some-class', function(err, els) { // get webpage elements by css
             els.length.should.be.above(0); // there should be some!
             els[0].text(function(elText) { // get text of the first element
               elText.should.eql("My very own text"); // it should be extremely personal and awesome
-              driver.context('NATIVE_APP', function(err) { // leave webview context
+              driver.execute("mobile: leaveWebView", function(err) { // leave webview context
                 // do more native stuff here if we want
                 driver.quit(); // stop webdrivage
               });
@@ -1566,28 +1732,28 @@ part of iOS 6** and was not available previously.
 ## Wd.java Code example
 
 ```java
-  //setup the web driver and launch the webview app.
-  DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-  desiredCapabilities.setCapability("device", "iPhone Simulator");
-  desiredCapabilities.setCapability("app", "http://appium.s3.amazonaws.com/WebViewApp6.0.app.zip");  
-  URL url = new URL("http://127.0.0.1:4723/wd/hub");
-  RemoteWebDriver remoteWebDriver = new RemoteWebDriver(url, desiredCapabilities);
-  
-  //switch to the latest web view
-  for(String contextHandle : remoteWebDriver.getContexts()){
-    remoteWebDriver.switchTo().context(contextHandle);
-  }
-  
-  //Interact with the elements on the guinea-pig page using id.
-  WebElement div = remoteWebDriver.findElement(By.id("i_am_an_id"));
-  Assert.assertEquals("I am a div", div.getText()); //check the text retrieved matches expected value
-  remoteWebDriver.findElement(By.id("comments")).sendKeys("My comment"); //populate the comments field by id.
-  
-  //leave the webview to go back to native app.
-  remoteWebDriver.switchTo().context('NATIVE_APP')
-  
-  //close the app.
-  remoteWebDriver.quit();
+//setup the web driver and launch the webview app.
+DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+desiredCapabilities.setCapability("device", "iPhone Simulator");
+desiredCapabilities.setCapability("app", "http://appium.s3.amazonaws.com/WebViewApp6.0.app.zip");
+URL url = new URL("http://127.0.0.1:4723/wd/hub");
+RemoteWebDriver remoteWebDriver = new RemoteWebDriver(url, desiredCapabilities);
+
+//switch to the latest web view
+for(String winHandle : remoteWebDriver.getWindowHandles()){
+remoteWebDriver.switchTo().window(winHandle);
+}
+
+//Interact with the elements on the guinea-pig page using id.
+WebElement div = remoteWebDriver.findElement(By.id("i_am_an_id"));
+Assert.assertEquals("I am a div", div.getText()); //check the text retrieved matches expected value
+remoteWebDriver.findElement(By.id("comments")).sendKeys("My comment"); //populate the comments field by id.
+
+//leave the webview to go back to native app.
+remoteWebDriver.executeScript("mobile: leaveWebView");
+
+//close the app.
+remoteWebDriver.quit();
 ```
 
 ## Wd.rb Code example using cucumber
@@ -1606,17 +1772,19 @@ capabilities =
     }
 @driver = Selenium::WebDriver.for(:remote, :desired_capabilities => capabilities, :url => SERVER_URL)
 
-# I switch to the last window because its always the webview in our case, in other cases you may need to specify a window number
-# View the appium logs while running @driver.window_handles to figure out which window is the one you want and find the associated number
+# I switch to the last window because its always the webview in our case,
+# in other cases you may need to specify a window number
+# View the appium logs while running @driver.window_handles to figure out
+# which window is the one you want and find the associated number
 # Then switch to it using @driver.switch_to_window("6")
 
 Given(/^I switch to webview$/) do 
-  webview = @driver.contexts.last
-  @driver.switch_to.context(webview)
+	webview = @driver.window_handles.last
+	@driver.switch_to.window(webview)
 end
 
 Given(/^I switch out of webview$/) do
-  @driver.switch_to(@driver.contexts.first)    
+  @driver.execute_script("mobile: leaveWebView")    
 end
 
 # Now you can use CSS to select an element inside your webview
@@ -1628,29 +1796,48 @@ end
 
 ### Troubleshooting Webview with Ruby:
 
-I created a quick function in my helper class to find web elements no matter
-what window its in (this is useful if your webview id changes or if you are
-using the same codebase to test android and ios)
-https://gist.github.com/feelobot/7309729
+I created a quick function in [my helper class](https://gist.github.com/feelobot/7309729)
+to find web elements no matter what window its in (this is useful if your
+webview id changes or if you are using the same codebase to test android and
+ios)
+
 
 ## Automating hybrid Android apps
 
 Appium comes with built-in hybrid support via Chromedriver. Appium also uses
 Selendroid under the hood for webview support on devices older than 4.4. (In
 that case, you'll want to specify `"device": "selendroid"` as a desired
-capability). Then follow all the same steps as above for iOS, i.e.,
-switching contexts, etc...
+capability). Then:
+
+1.  Navigate to a portion of your app where a web view is active
+1.  Call [POST session/:sessionId/window](http://code.google.com/p/selenium/wiki/JsonWireProtocol#/session/:sessionId/window)
+with the string "WEBVIEW" as the window handle, e.g., `driver.window("WEBVIEW")`.
+1.  (This puts your Appium session into a mode where all commands are
+interpreted as being intended for automating the web view,
+rather than the native portion of the app. For example,
+if you run getElementByTagName, it will operate on the DOM of the web view,
+rather than return UIAElements. Of course, certain WebDriver methods only
+make sense in one context or another, so in the wrong context you will
+receive an error message).
+1.  To stop automating in the web view context and go back to automating the
+native portion of the app, simply call `window` again with the string
+"NATIVE_APP", e.g., `driver.window("NATIVE_APP")`.
+
+Note: We could have used the same strategy as above for leaving the webview
+(calling `mobile: leaveWebView`), however Selendroid uses the
+`WEBVIEW`/`NATIVE_APP` window setting strategy, which also works with regular
+ Appium hybrid support, so we show that here for parity.
 
 ## Wd.js Code example
 
 ```js
 // assuming we have an initialized `driver` object working on a hybrid app
-driver.context("WEBVIEW", function(err) { // choose the only available view
+driver.window("WEBVIEW", function(err) { // choose the only available view
   driver.elementsByCss('.some-class', function(err, els) { // get webpage elements by css
     els.length.should.be.above(0); // there should be some!
     els[0].text(function(elText) { // get text of the first element
       elText.should.eql("My very own text"); // it should be extremely personal and awesome
-      driver.context("NATIVE_APP", function(err) { // leave webview context
+      driver.window("NATIVE_APP", function(err) { // leave webview context
         // do more native stuff here if we want
         driver.quit(); // stop webdrivage
       });
@@ -1662,26 +1849,26 @@ driver.context("WEBVIEW", function(err) { // choose the only available view
 ## Wd.java Code example
 
 ```java
-  //setup the web driver and launch the webview app.
-  DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
-  desiredCapabilities.setCapability("device", "Selendroid");
-  desiredCapabilities.setCapability("app", "/path/to/some.apk");  
-  URL url = new URL("http://127.0.0.1:4723/wd/hub");
-  RemoteWebDriver remoteWebDriver = new RemoteWebDriver(url, desiredCapabilities);
-  
-  //switch to the web view
-  remoteWebDriver.switchTo().context("WEBVIEW");
-  
-  //Interact with the elements on the guinea-pig page using id.
-  WebElement div = remoteWebDriver.findElement(By.id("i_am_an_id"));
-  Assert.assertEquals("I am a div", div.getText()); //check the text retrieved matches expected value
-  remoteWebDriver.findElement(By.id("comments")).sendKeys("My comment"); //populate the comments field by id.
-  
-  //leave the webview to go back to native app.
-  remoteWebDriver.switchTo().context("NATIVE_APP");
-  
-  //close the app.
-  remoteWebDriver.quit();
+//setup the web driver and launch the webview app.
+DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+desiredCapabilities.setCapability("device", "Selendroid");
+desiredCapabilities.setCapability("app", "/path/to/some.apk");
+URL url = new URL("http://127.0.0.1:4723/wd/hub");
+RemoteWebDriver remoteWebDriver = new RemoteWebDriver(url, desiredCapabilities);
+
+//switch to the web view
+remoteWebDriver.switchTo().window("WEBVIEW");
+
+//Interact with the elements on the guinea-pig page using id.
+WebElement div = remoteWebDriver.findElement(By.id("i_am_an_id"));
+Assert.assertEquals("I am a div", div.getText()); //check the text retrieved matches expected value
+remoteWebDriver.findElement(By.id("comments")).sendKeys("My comment"); //populate the comments field by id.
+
+//leave the webview to go back to native app.
+remoteWebDriver.switchTo().window("NATIVE_APP");
+
+//close the app.
+remoteWebDriver.quit();
 ```
 
 
@@ -1770,7 +1957,7 @@ bundle exec rake ci:fruit_deploy_app | while read line ; do
 
 Once fruitstrap is killed, node server can be launched and Appium tests can run!
 
-Next: [Running Appium on Real Devices](./real-devices.html)
+Next: [Running Appium on Real Devices](#real-devices.md)
 
 
 
@@ -1783,7 +1970,7 @@ Chrome on Android, Appium can help you. Basically, you write a normal WebDriver
 test, and use Appium as the Selenium server with a special set of desired
 capabilities.
 
-## Mobile Safari on Simulator
+### Mobile Safari on Simulator
 
 First of all, make sure developer mode is turned on in your Safari
 preferences so that the remote debugger port is open.
@@ -1801,7 +1988,7 @@ Then, use desired capabilities like these to run your test in mobile Safari:
 }
 ```
 
-## Mobile Safari on a Real iOS Device
+### Mobile Safari on a Real iOS Device
 
 To be able to run your tests against mobile Safari we use the [SafariLauncher
  App](https://github.com/snevesbarros/SafariLauncher) to launch Safari. Once
@@ -1810,10 +1997,9 @@ To be able to run your tests against mobile Safari we use the [SafariLauncher
 
 **NOTE:** There is currently [a bug](https://github.com/google/ios-webkit-debug-proxy/issues/38)
 in the ios-webkit-debug-proxy. You have to trust the machine before you can
-run the ios-webkit-debug-proxy
-against your iOS device.
+run the ios-webkit-debug-proxy against your iOS device.
 
-## Setup
+### Setup
 
 Before you can run your tests against Safari on a real device you will need to:
 * Have the **ios-webkit-debug-proxy** installed and running (see the [hybrid docs](#hybrid.md) for instructions)
@@ -1852,7 +2038,7 @@ $ node /lib/server/main.js -U <UDID>
 
 To configure you test to run against safari simpley set the **"app"** to be **"safari"**.
 
-## Java Example
+### Java Example
 
 ```java
 //setup the web driver and launch the webview app.
@@ -1871,12 +2057,21 @@ remoteWebDriver.findElement(By.id("comments")).sendKeys("My comment"); //populat
 remoteWebDriver.quit();
 ```
 
-## Mobile Chrome on Emulator or Real Device
+### Mobile Chrome on Emulator or Real Device
 
 Pre-requisites:
 
-*  Make sure Chrome (an app with the package `com.android.chrome`) is installed on your device or emulator. Getting Chrome for the x86 version of the emulator is not currently possible without building Chromium, so you may want to run an ARM emulator and then copy a Chrome APK from a real device to get Chrome on an emulator.
-*  If downloaded from [NPM](https://www.npmjs.org/package/appium), or running from the [.app](https://github.com/appium/appium-dot-app), nothing needs to be done. If running from source, the `reset` script will download ChromeDriver and put it in `build`. A particular version can be specified by passing the `--chromedriver-version` option (e.g., `./reset.sh --android --chromedriver-version 2.8`), otherwise the most recent one will be retrieved.
+*  Make sure Chrome (an app with the package `com.android.chrome`) is
+   installed on your device or emulator. Getting Chrome for the x86 version of
+   the emulator is not currently possible without building Chromium,
+   so you may want to run an ARM emulator and then copy a Chrome APK from a
+   real device to get Chrome on an emulator.
+*  If downloaded from [NPM](https://www.npmjs.org/package/appium),
+   or running from the [.app](https://github.com/appium/appium-dot-app),
+   nothing needs to be done. If running from source, the `reset` script will
+   download ChromeDriver and put it in `build`. A particular version can be
+   specified by passing the `--chromedriver-version` option (e.g.,
+   `./reset.sh --android --chromedriver-version 2.8`), otherwise the most recent one will be retrieved.
 
 Then, use desired capabilities like these to run your test in Chrome:
 
@@ -1913,7 +2108,7 @@ Ruby without the gem
 
 Fetch a file from the device's filesystem, returning it base64 encoded.
 
-Takes a single argument, `path`. On Android and iOS, this is either the path
+Takes a single argument, `path`.  On Android and iOS, this is either the path
 to the file (relative to the root of the app's file system).  On iOS only,
 if path starts with `/AppName.app`, which will be replaced with the
 application's .app directory
@@ -1922,7 +2117,7 @@ application's .app directory
 # Android and iOS
 @driver.execute_script 'mobile: pullFile', {path: '/Library/AddressBook/AddressBook.sqlitedb'} #=> /Library/AddressBook/AddressBook.sqlitedb
 
-# iOS only
+#iOS only
 @driver.execute_script 'mobile: pullFile, {path: '/UICatalog.app/logfile.log'} #=> /Applications/12323-452262-24241-23-124124/UICatalog.app/logfile.log
 ```
 
@@ -1934,9 +2129,10 @@ Ruby
 
 ## Android mobile methods
 
-## KeyEvent
+### KeyEvent
 
-[KeyEvent](http://developer.android.com/reference/android/view/KeyEvent.html) enables sending a keycode to Android.
+[KeyEvent](http://developer.android.com/reference/android/view/KeyEvent.html)
+enables sending a keycode to Android.
 
 Press the system menu button in Java.
 
@@ -1958,7 +2154,7 @@ Ruby without the gem
 @driver.execute_script 'mobile: keyevent', :keycode => 82
 ```
 
-## Mobile find
+### Mobile find
 
 Java
 
@@ -2061,6 +2257,9 @@ own items in the SDK manager. Make sure you install the build-tools and platform
 * Make sure the Android emulator is up and running.
 * It's sometimes useful to run `adb kill-server && adb devices`. This can
   reset the connection to the Android device.
+* Make sure you know about the `app-package`, `app-activity`,
+  and `app-wait-activity` desiredCapabilities (see [this doc](#running-tests.md)
+  for more information).
 * Make sure you set ANDROID_HOME pointing to the Android SDK directory
 
 ## IOS
@@ -2120,12 +2319,12 @@ output when it's run in verbose mode so that we can diagnose what's going on.
 * Webview support works on real iOS devices with a proxy, see [discussion](https://groups.google.com/d/msg/appium-discuss/u1ropm4OEbY/uJ3y422a5_kJ).
 * Sometimes iOS UI elements become invalidated milliseconds after they are
   found. This results in an error that looks like `(null) cannot be tapped`.
-  Sometimes the only solution is to put the finding-and-clicking code in a retry
-  block.
+  Sometimes the only solution is to put the finding-and-acting code in a retry
+  block. See also `mobile: findAndAct` on the [finding elements doc page](#finding-elements.md)
 * Appium may have difficulties finding the `node` executable if you've
-  installed Node and npm via MacPorts. You must make sure that the MacPorts bin
-  folder (`/opt/local/bin` by default) is added to `PATH` somewhere in your
-  `~/.profile`, `~/.bash_profile` or `~/.bashrc`.
+installed Node and npm via MacPorts. You must make sure that the MacPorts bin
+ folder (`/opt/local/bin` by default) is added to `PATH` somewhere in your
+ `~/.profile`, `~/.bash_profile` or `~/.bashrc`.
 
 ## Specific Errors
 
@@ -2421,36 +2620,6 @@ which SDKs you have available, try `xcodebuild -showsdks`:
 
 
 
-# <span id="how-to-write-docs.md"></span>How to write docs
-
-
-`#` is used to write a h1 header. Each document must start with a h1 header.
-Don't use the `===` underline method of creating headers.
-
-## Subheaders
-
-`##` is used to write subheaders. Don't use the `---` underline method of
-creating sub headers.
-
-### Regular headers
-
-`###` is used for headers that don't appear in the table of contents.
-Don't use h4 `####`, h5 `#####`, or h6 `######`.
-
-### Line breaks
-
-Don't use line breaks such as `--` or `---`. This will confuse Slate.
-
-### Linking
-
-Link to another document using this syntax:  [link text](#filename.md)`
-
-To link inside a document, use the `#` from the Slate URL.
-`[go direct to json](#json-wire-protocol-server-extensions)`
-
-
-
-
 # <span id="credits.md"></span>Credits
 
 
@@ -2465,5 +2634,163 @@ To link inside a document, use the `#` from the Slate URL.
 * [Remote Debug](https://github.com/leftlogic/remote-debug)
 * [Selenium Project](http://code.google.com/p/selenium/)
 * [ios-webkit-debug-proxy](https://github.com/google/ios-webkit-debug-proxy)
+
+
+
+
+# <span id="CONTRIBUTING.md"></span>Contributing to Appium
+
+
+Fork the project, make a change, and send a pull request! Please have a look at our
+[Style Guide](#style-guide.md) before getting to work.
+Please make sure the unit and functional tests pass before sending a pull request; for more
+information on how to run tests, keep reading!
+
+Make sure you read and follow the setup instructions in the README first.
+
+## Using Appium
+
+An Appium setup involves the Appium server, which sends messages back and forth between
+your test code and devices/emulators, and a test script, written in whatever language
+binding exists that is compatible with Appium. Run an instance of an Appium server,
+and then run your test.
+
+The quick way to get started:
+
+    $ git clone https://github.com/appium/appium.git
+    $ cd appium
+    $ ./reset.sh
+    $ sudo grunt authorize # for ios only
+    $ node .
+
+## Hacking with Appium
+
+From your local repo's command prompt, install the following packages using the
+following commands (if you didn't install `node` using homebrew, you might have
+to run npm with sudo privileges):
+
+    npm install -g mocha
+    npm install -g grunt-cli
+    ./reset.sh --dev
+
+The first two commands install test and build tools (`sudo` may not be necessary
+if you installed node.js via Homebrew). The third command installs all app
+dependencies and builds supporting binaries and test apps. `reset.sh` is also the
+recommended command to run after pulling changes from master. At this point,
+you're able to start the Appium server:
+
+    node .
+
+There are some arguments you can pass into the Appium server from the command-line:
+
+    node . --app /absolute/path/to/app  // launch Appium server with app
+    node . --launch // pre-launch the app when appium loads
+    node . --log /my/appium.log // log to file instead of stdout
+    node . --quiet // don't log verbose output
+
+See [the server documentation](#server-args.md)
+for a full list of arguments.
+
+Like the power of automating dev tasks? Check out the [Appium Grunt tasks](#grunt.md)
+available to help with building apps, installing apps, generating docs, etc.
+
+### Hacking with Appium for iOS
+
+To avoid a security dialog that may appear when launching your iOS apps you'll
+have to modify your `/etc/authorization` file in one of two ways:
+
+1. Manually modify the element following `<allow-root>` under `<key>system.privilege.taskport</key>`
+   in your `/etc/authorization` file to `<true/>`.
+
+2. Run the following grunt command which automatically modifies your
+   `/etc/authorization` file for you:
+
+       sudo grunt authorize
+
+At this point, run:
+
+    ./reset.sh --ios --dev
+
+Now your Appium instance is ready to go. Run `node .` to kick up the Appium server.
+
+### Hacking with Appium for Android
+
+Bootstrap running for Android by running:
+
+    ./reset.sh --android --dev
+
+If you want to use [Selendroid](http://github.com/DominikDary/selendroid) for support on
+older Android platforms like 2.3, then run:
+
+    ./reset.sh --selendroid --dev
+
+Make sure you have one and only one Android emulator or device running, e.g.
+by running this command in another process (assuming the `emulator` command is
+on your path):
+
+    emulator -avd <MyAvdName>
+
+Now you are ready to run the Appium server via `node .`.
+
+### Making sure you're up to date
+
+Since Appium uses dev versions of some packages, it often becomes necessary to
+install new `npm` packages or update various things. There's a handy shell script
+to do all this for all platforms (the `--dev` flag gets dev npm dependencies
+and test applications used in the Appium test suite). You will also need to do
+this when Appium bumps its version up:
+
+    ./reset.sh --dev
+
+Or you can run reset for individual platforms only:
+
+    ./reset.sh --ios --dev
+    ./reset.sh --android --dev
+    ./reset.sh --selendroid --dev
+
+## Running Tests
+
+First, check out our documentation on [running tests in general](#running-tests.md)
+Make sure your system is set up properly for the platforms you desire to test
+on.
+
+Once your system is set up and your code is up to date, you can run unit tests
+with:
+
+    grunt unit
+
+You can run functional tests for all supported platforms (after ensuring that
+Appium is running in another window with `node .`) with:
+
+    bin/test.sh
+
+Or you can run particular platform tests with `test.sh`:
+
+    bin/test.sh --android
+    bin/test.sh --ios
+    bin/test.sh --ios7
+    bin/test.sh --ios71
+
+Before committing code, please run `grunt` to execute some basic tests and check
+your changes against code quality standards:
+
+    grunt
+    > Running "lint:all" (lint) task
+    > Lint free.
+    > Done, without errors.
+
+### Running individual tests
+
+If you have an Appium server listening, you can run individual test files using
+Mocha, for example:
+
+    mocha -t 60000 -R spec test/functional/ios/testapp/simple.js
+
+Or individual tests (e.g., a test with the word "alert" in the name):
+
+    mocha -t 60000 -R spec --grep "alert" test/functional/ios/apidemos
+
+NOTE: For Android, you will need an emulator/device with screen size of 4.0"
+(480x800). Some tests might fail on a different screen size.
 
 
