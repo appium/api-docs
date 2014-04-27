@@ -64,7 +64,7 @@ def process_github_links markdown, markdown_file_path
       # If a link has a has, use that. Otherwise link to the start of the file.
       ext, hash = ext.split '#'
       if ext == '.md'
-        result = " [#{link_text}](##{hash || link_target})"
+        result = "#{leading_space}[#{link_text}](##{hash || link_target})"
       elsif invalid_ext?(ext, link_target)
         exit_with no_ext
       end
