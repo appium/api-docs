@@ -55,13 +55,13 @@ def process_github_links markdown, markdown_file_path
       ext = File.extname link_target
       no_ext = "No extension on #{full.strip} in #{markdown_file_path.strip}"
 
-      exit_with no_ext if ext.empty?
+      exit_with no_ext if ext.empty? && ! link_target.end_with?('/')
 
       # If a link has a has, use that. Otherwise link to the start of the file.
       ext, hash = ext.split '#'
       if ext == '.md'
         result = " [#{link_text}](##{hash || link_target.strip})"
-      elsif ext.empty?
+      elsif ext.empty? && ! link_target.end_with?('/')
         exit_with no_ext
       end
     end
