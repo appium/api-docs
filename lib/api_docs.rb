@@ -48,7 +48,8 @@ def process_github_links markdown, markdown_file_path
     link_text   = $1
     link_target = $2
 
-    result = link_target = trim_link link_target
+    link_target = trim_link link_target
+    result = " [#{link_text}](#{link_target})"
 
     no_slash = !link_target.include?('/')
     not_link_to_self = link_target != '#'
@@ -62,7 +63,7 @@ def process_github_links markdown, markdown_file_path
       # If a link has a has, use that. Otherwise link to the start of the file.
       ext, hash = ext.split '#'
       if ext == '.md'
-        result = " [#{link_text}](##{hash || link_target.strip})"
+        result = " [#{link_text}](##{hash || link_target})"
       elsif invalid_ext?(ext, link_target)
         exit_with no_ext
       end
