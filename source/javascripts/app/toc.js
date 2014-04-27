@@ -10,7 +10,7 @@
   function toc () {
     toc = $("#toc").tocify({
       selectors: 'h1, h2',
-      extendPage: true,
+      extendPage: false,
       theme: 'none',
       smoothScroll: false,
       showEffectSpeed: 0,
