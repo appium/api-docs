@@ -48,7 +48,7 @@ def process_github_links markdown, markdown_file_path
     link_text   = $1
     link_target = $2
 
-    link_target = trim_link link_target
+    result = link_target = trim_link link_target
 
     no_slash = !link_target.include?('/')
     not_link_to_self = link_target != '#'
