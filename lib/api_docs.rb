@@ -49,7 +49,8 @@ def process_github_links markdown, markdown_file_path
     link_target = $2
 
     link_target = trim_link link_target
-    result = " [#{link_text}](#{link_target})"
+    leading_space = full.match(/^\s*/).to_s
+    result = "#{leading_space}[#{link_text}](#{link_target})"
 
     no_slash = !link_target.include?('/')
     not_link_to_self = link_target != '#'
