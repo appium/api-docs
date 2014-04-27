@@ -42,7 +42,7 @@ end
 def process_github_links markdown, markdown_file_path
   # links can be multiline so search entire markdown
   # (?<!!) -- negative look behind. don't match if this is an image link. ![]
-  markdown.gsub(/(?<!!) \[ ( [^\[]* ) \] \( ( [^)\/]+ ) \)/mx) do |full|
+  markdown.gsub(/(?<!!) \[ ( [^\[]* ) \] \( ( [^)]+ ) \)/mx) do |full|
     result = full
 
     link_text   = $1
