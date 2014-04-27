@@ -48,6 +48,9 @@ def process_github_links markdown, markdown_file_path
     link_text   = $1
     link_target = $2
 
+    # process docs/en/filename.md#testing links
+    link_target = File.basename link_target if link_target.start_with? 'docs/'
+
     if link_target && !link_target.include?('/')
       ext = File.extname link_target
       no_ext = "No extension on #{full.strip} in #{markdown_file_path.strip}"
