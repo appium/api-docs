@@ -49,25 +49,34 @@ def process_github_links markdown, markdown_file_path
     link_target = $2
 
     # process docs/en/filename.md#testing links
-    link_target = File.basename link_target if link_target.start_with? 'docs/'
+    link_target = trim_link link_target
 
     if link_target && !link_target.include?('/')
       ext = File.extname link_target
       no_ext = "No extension on #{full.strip} in #{markdown_file_path.strip}"
 
-      exit_with no_ext if ext.empty? && ! link_target.end_with?('/')
+      exit_with no_ext if invalid_ext?(ext, link_target)
 
       # If a link has a has, use that. Otherwise link to the start of the file.
       ext, hash = ext.split '#'
       if ext == '.md'
         result = " [#{link_text}](##{hash || link_target.strip})"
-      elsif ext.empty? && ! link_target.end_with?('/')
+      elsif invalid_ext?(ext, link_target)
         exit_with no_ext
       end
     end
 
     result
   end
+end
+
+def invalid_ext? ext, link_target
+  ext.empty? && ! link_target.end_with?('/')
+end
+
+def trim_link link_target
+  trim = link_target.start_with?('docs/') && ! link_target.end_with?('/')
+  trim ? File.basename(link_target) : link_target
 end
 
 def order_files files
