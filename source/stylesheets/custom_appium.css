@@ -4,7 +4,7 @@
 }
 
 .content table {
-  margin-right: 0%;
+  margin-right: 0% !important;
   background-color: #eaf2f6;
 }
 
