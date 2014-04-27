@@ -48,7 +48,6 @@ def process_github_links markdown, markdown_file_path
     link_text   = $1
     link_target = $2
 
-    # process docs/en/filename.md#testing links
     link_target = trim_link link_target
 
     if link_target && !link_target.include?('/')
@@ -74,8 +73,12 @@ def invalid_ext? ext, link_target
   ext.empty? && ! link_target.end_with?('/')
 end
 
+# process docs/en/filename.md#testing links
+# handle relative links [getting started](../../README.md)
 def trim_link link_target
-  trim = link_target.start_with?('docs/') && ! link_target.end_with?('/')
+  return link_target if link_target.end_with?('/')
+  # trim doc and relative
+  trim = link_target.start_with?('docs/') || link_target.start_with?('../')
   trim ? File.basename(link_target) : link_target
 end
 
