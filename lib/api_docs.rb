@@ -50,7 +50,10 @@ def process_github_links markdown, markdown_file_path
 
     link_target = trim_link link_target
 
-    if link_target && !link_target.include?('/')
+    no_slash = !link_target.include?('/')
+    not_link_to_self = link_target != '#'
+
+    if link_target && no_slash && not_link_to_self
       ext = File.extname link_target
       no_ext = "No extension on #{full.strip} in #{markdown_file_path.strip}"
 
@@ -76,6 +79,7 @@ end
 # process docs/en/filename.md#testing links
 # handle relative links [getting started](../../README.md)
 def trim_link link_target
+  link_target = link_target.strip if link_target
   return link_target if link_target.end_with?('/')
   # trim doc and relative
   trim = link_target.start_with?('docs/') || link_target.start_with?('../')
