@@ -147,6 +147,7 @@
 
             var self = this;
 
+            self.tocifyWrapper = $('.tocify-wrapper');
             self.extendPageScroll = true;
 
             // Internal array that keeps track of all TOC items (Helps to recognize if there are duplicate TOC item strings)
@@ -703,6 +704,15 @@
                             // Highlights the corresponding list item
                             elem.addClass(self.focusClass);
 
+                            // Scroll highlighted element's header
+                            var tocifyWrapper = self.tocifyWrapper;
+                            var scrollToElem = $(elem).closest('.tocify-header');
+
+                            var elementOffset = scrollToElem.offset().top,
+                                wrapperOffset = tocifyWrapper.offset().top,
+                                currentWrapperPosition = tocifyWrapper.scrollTop();
+                            var scrollPosition = elementOffset - wrapperOffset + currentWrapperPosition;
+                            tocifyWrapper.scrollTop(scrollPosition);
                         }
 
                         if(self.options.scrollHistory) {
