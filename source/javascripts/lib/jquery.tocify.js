@@ -329,7 +329,6 @@
                 // Highlights the current list item that was clicked
                 elem.addClass(self.focusClass);
 
-
                 // If the showAndHide option is true
                 if(self.options.showAndHide) {
 
@@ -654,7 +653,9 @@
                                 }));
 
                                 if(self.extendPageScroll) {
+
                                     currentElem = self.element.find('li.active');
+
                                     self._scrollTo($("div[data-unique=" + currentElem.attr("data-unique") + "]"));
 
                                 }
@@ -703,7 +704,7 @@
                             // Highlights the corresponding list item
                             elem.addClass(self.focusClass);
 
-                            // Scroll highlighted element's header
+                            // Scroll to highlighted element's header
                             var tocifyWrapper = self.tocifyWrapper;
                             var scrollToElem = $(elem).closest('.tocify-header');
 
