@@ -710,8 +710,14 @@
                             var elementOffset = scrollToElem.offset().top,
                                 wrapperOffset = tocifyWrapper.offset().top,
                                 currentWrapperPosition = tocifyWrapper.scrollTop();
-                            var scrollPosition = elementOffset - wrapperOffset + currentWrapperPosition;
-                            tocifyWrapper.scrollTop(scrollPosition);
+                            var offset = elementOffset - wrapperOffset;
+
+                            if (offset >= $(window).height()) {
+                              var scrollPosition = offset + currentWrapperPosition;
+                              tocifyWrapper.scrollTop(scrollPosition);
+                            } else if (offset < 0) {
+                              tocifyWrapper.scrollTop(0);
+                            }
                         }
 
                         if(self.options.scrollHistory) {
