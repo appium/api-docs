@@ -216,6 +216,8 @@ def markdown opts={}
     data += "\n\n" + markdown + "\n\n"
   end
 
+  data.gsub! '<expand_table>', '<p class="expand_table"></p>'
+
   index_file = File.expand_path(File.join(output_folder, 'index.md'))
 
   File.open(index_file, 'w') do |f|
