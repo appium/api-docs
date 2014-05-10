@@ -2,7 +2,7 @@ def header
   <<-MARKDOWN
 ---
 title: API Reference
-search: true
+search: false
 
 language_tabs:
   - ruby: Ruby
@@ -93,8 +93,8 @@ end
 
 def order_files files
   order = %w(
-README.md
 intro.md
+README.md
 
 platform-support.md
 real-devices.md
@@ -121,6 +121,8 @@ mobile_methods.md
 touch-actions.md
 
 troubleshooting.md
+migrating-to-1-0.md
+
 style-guide.md
 grunt.md
 how-to-write-docs.md
