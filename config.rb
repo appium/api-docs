@@ -35,8 +35,13 @@ configure :build do
   # set :http_prefix, "/Content/images/"
 end
 
-# requires patched middleman. see https://github.com/middleman/middleman/issues/1277
+# Requires patched middleman
+#
+# https://github.com/middleman/middleman/pull/1278
+# https://github.com/middleman/middleman/issues/1277
 after_render do |content, path, locs, template_class|
   # restore character entities such as &amp;#96;
+  content ||= ''
   content.gsub! '&amp;', '&'
+  content
 end
