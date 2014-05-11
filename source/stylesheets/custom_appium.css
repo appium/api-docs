@@ -20,10 +20,11 @@
 /* enable multi line code blocks that stay in the center column */
 .content code {
   display: inline-block;
-  white-space: pre;
+  white-space: pre-line; /* line wrap */
   /* transparent background color means text is invisible when
-     multi-line code extends into left column */
-  background-color: #dfe5e9 !important;
+     multi-line code extends into left column.
+     required if white-space is pre instead of pre-line
+  background-color: #dfe5e9 !important;  */
 }
 
 /* ensure single line `code` blocks don't extend into the left column */
