@@ -26,3 +26,6 @@ end
 gem "rake", "~> 10.3.0"
 
 gem 'therubyracer', :platforms => :ruby
+
+# use by invoking the "middleman console" command
+gem 'middleman-pry', '~> 0.0.3'

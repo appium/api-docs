@@ -1,7 +1,9 @@
-require 'middleman-gh-pages'
 require_relative 'lib/api_docs'
 
-task :default => [:build]
+desc 'Build the html'
+task :build do
+  sh 'bundle exec middleman build --clean'
+end
 
 desc 'Merge markdown files'
 task :md, :target_folder do |task, args|

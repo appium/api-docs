@@ -34,3 +34,9 @@ configure :build do
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
 end
+
+# requires patched middleman. see https://github.com/middleman/middleman/issues/1277
+after_render do |content, path, locs, template_class|
+  # restore character entities such as &amp;#96;
+  content.gsub! '&amp;', '&'
+end
