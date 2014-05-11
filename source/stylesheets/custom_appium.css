@@ -23,7 +23,7 @@
   white-space: pre-wrap; /* line wrap */
   /* transparent background color means text is invisible when
      multi-line code extends into left column.
-     required if white-space is pre instead of pre-line
+     required if white-space is pre instead of pre-wrap
   background-color: #dfe5e9 !important;  */
 }
 
