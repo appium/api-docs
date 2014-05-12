@@ -21,13 +21,14 @@ under the License.
 
   function activateLanguage(language) {
     if (!language) return;
-
     $("#lang-selector a").removeClass('active');
     $("#lang-selector a[data-language-name='" + language + "']").addClass('active');
     for (var i=0; i < languages.length; i++) {
       $(".highlight." + languages[i]).hide();
+      $(".desc." + languages[i]).hide();
     }
     $(".highlight." + language).show();
+    $(".desc." + language).show();
   }
 
   function setupLanguages(l) {
