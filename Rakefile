@@ -2,6 +2,7 @@ require_relative 'lib/api_docs'
 
 desc 'Build the html'
 task :build do
+  sh 'bundle install'
   sh 'bundle exec middleman build --clean'
 end
 
