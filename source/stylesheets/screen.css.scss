@@ -263,7 +263,7 @@ html, body {
       clear: both;
     }
 
-    &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, & table, &>ul, &>ol, &>aside, &>dl {
+    &>h1, & h2, &>h3, &>h4, &>h5, &>h6, & p, & table, &>ul, &>ol, &>aside, &>dl {
       margin-right: $examples-width;
       padding: 0 $main-padding;
       @include box-sizing(border-box);
