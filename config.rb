@@ -44,13 +44,19 @@ after_render do |content, path, locs, template_class|
   content ||= ''
   content.gsub! '&amp;', '&'
 
-  # smarty pants transforms the double dash
-  # '<!-- <ruby> -->' => '<span class="desc ruby">'
-  ruby_start = '<p>&lt;!&ndash; &lt;ruby&gt; &ndash;&gt;</p>'
-  ruby_end =   '<p>&lt;!&ndash; &lt;&#47;ruby&gt; &ndash;&gt;</p>'
-  content.gsub! ruby_start, '<span class="desc ruby">'
-  # '<!-- </ruby> -->' => '</span>'
-  content.gsub! ruby_end, '</span>'
+  # replacement, [targets]
+  map = [
+    ['<span class="desc ruby">', ['<p>&lt;ruby&gt;']], # <ruby>
+    ['<span class="desc java">', ['<p>&lt;java&gt;']], # <java>
+    ['</span>', ['&lt;&#47;ruby&gt;</p>', # </ruby>, </java> => </span>
+                 '&lt;&#47;java&gt;</p>']],
+  ]
+
+  map.each do |replacement, targets|
+    targets.each do |target|
+      content.gsub! target, replacement
+    end
+  end
 
   content
 end
