@@ -44,12 +44,57 @@ after_render do |content, path, locs, template_class|
   content ||= ''
   content.gsub! '&amp;', '&'
 
+=begin
+
+Input:
+
+<ruby>
+
+ruby paragraph
+
+</ruby>
+
+<java>
+
+java pragraph
+
+</java>
+
+Transformed:
+
+&lt;ruby>
+
+ruby paragraph
+
+&lt;&#47;ruby>
+
+&lt;java>
+
+java paragraph
+
+&lt;&#47;java>
+
+Html:
+
+<span class="desc ruby">
+
+<p>ruby paragraph</p>
+
+</span>
+
+<span class="desc java">
+
+<p>java paragraph</p>
+
+</span>
+=end
+
   # replacement, [targets]
   map = [
-    ['<span class="desc ruby">', ['<p>&lt;ruby&gt;']], # <ruby>
-    ['<span class="desc java">', ['<p>&lt;java&gt;']], # <java>
-    ['</span>', ['&lt;&#47;ruby&gt;</p>', # </ruby>, </java> => </span>
-                 '&lt;&#47;java&gt;</p>']],
+    ['<span class="desc ruby">', ['<p>&lt;ruby&gt;</p>']], # <ruby>
+    ['<span class="desc java">', ['<p>&lt;java&gt;</p>']], # <java>
+    ['</span>', ['<p>&lt;&#47;ruby&gt;</p>', # </ruby>, </java> => </span>
+                 '<p>&lt;&#47;java&gt;</p>']],
   ]
 
   map.each do |replacement, targets|
