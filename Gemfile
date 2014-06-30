@@ -29,3 +29,5 @@ gem 'therubyracer', :platforms => :ruby
 
 # use by invoking the "middleman console" command
 gem 'middleman-pry', '~> 0.0.3'
+
+gem 'appium_doc_lint', '~> 0.0.9'
