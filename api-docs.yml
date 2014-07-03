@@ -1,0 +1,77 @@
+ignore:
+  - contributing-to-appium
+
+folder-order:
+  - about-appium
+  - appium-setup
+  - writing-running-appium
+  - advanced-concepts
+
+folder-map:
+
+  about-appium:
+    label: About Appium
+    file-order:
+      - intro.md
+      - appium-clients.md
+  appium-setup:
+    label: Setting up Appium
+    file-order:
+      - platform-support.md
+      - real-devices.md
+      - running-on-osx.md
+      - running-on-windows.md
+      - running-on-linux.md
+      - android-hax-emulator.md
+      - ios-deploy.md
+      - troubleshooting.md
+  writing-running-appium:
+    label: Running Appium tests
+    file-order:
+      - server-args.md
+      - caps.md
+      - finding-elements.md
+      - mobile-web.md
+      - running-tests.md
+      - touch-actions.md
+      - appium-bindings.md
+      - ios_predicate.md
+      - network_connection.md
+      - uiautomator_uiselector.md
+      - unicode.md
+  advanced-concepts:
+      label: Advanced Concepts
+      file-order:
+        - grid.md
+        - hybrid.md
+        - migrating-to-1-0.md
+
+file-order-older-versions:
+      - intro.md
+      - README.md
+      - platform-support.md
+      - real-devices.md
+      - running-on-osx.md
+      - running-on-windows.md
+      - running-on-linux.md
+      - running-tests.md
+      - android-hax-emulator.md
+      - android_coverage.md
+      - server-args.md
+      - caps.md
+      - finding-elements.md
+      - gestures.md
+      - grid.md
+      - hybrid.md
+      - ios-deploy.md
+      - mobile-web.md
+      - mobile_methods.md
+      - touch-actions.md
+      - troubleshooting.md
+      - migrating-to-1-0.md
+
+ignore-files-older-versions:
+      - grunt.md
+      - how-to-write-docs.md
+      - credits.md
+      - style-guide.md
