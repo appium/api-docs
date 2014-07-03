@@ -1,3 +1,6 @@
+require 'yaml'
+
+
 def header
   <<-MARKDOWN
 ---
@@ -91,43 +94,7 @@ def trim_link link_target
   trim ? File.basename(link_target) : link_target
 end
 
-def order_files files
-  order = %w(
-intro.md
-README.md
-
-platform-support.md
-real-devices.md
-
-running-on-osx.md
-running-on-windows.md
-running-on-linux.md
-
-running-tests.md
-
-android-hax-emulator.md
-android_coverage.md
-
-server-args.md
-caps.md
-
-finding-elements.md
-gestures.md
-grid.md
-hybrid.md
-ios-deploy.md
-mobile-web.md
-mobile_methods.md
-touch-actions.md
-
-troubleshooting.md
-migrating-to-1-0.md
-
-style-guide.md
-grunt.md
-how-to-write-docs.md
-credits.md
-)
+def order_list(order, files, ignore_list)
 
   extra_files   = []
   ordered_files = []
@@ -136,6 +103,8 @@ credits.md
 
     if index
       ordered_files[index] = file
+    elsif ignore_list.index File.basename file
+      #ignore file/folder
     else
       extra_files << file
     end
@@ -178,12 +147,75 @@ end
 def markdown opts={}
   folder_to_glob = validate_dir opts[:glob]
   output_folder = validate_dir opts[:output]
+  directories = Dir.entries(opts[:glob]).select {|folder| File.directory? File.join(opts[:glob],folder) and !(folder =='.' || folder == '..') }
+  #Making it backward compatible if no directories are present (older versions of appium docs does not have directory structure).
+  if directories.length === 0
+    markdown_old opts
+  else
+    data = ''
+    yaml_settings_data = YAML.load_file "api-docs.yml"
+    folder_map = yaml_settings_data["folder-map"]
+    ignore_list = yaml_settings_data["ignore"]
+    directories = order_list(yaml_settings_data["folder-order"], directories, ignore_list)
 
+    directories.each do |directory_name|
+
+      subdirectory = File.join(folder_to_glob,directory_name);
+      files = file_glob File.expand_path(File.join(subdirectory, '**', '*.md'))
+      files = order_list(folder_map[directory_name]["file-order"], files, ignore_list)
+      data += "# #{folder_map[directory_name]["label"]}\n\n"
+      files.each do |markdown_file|
+        # anchor must be placed after the first h1 otherwise the css will break
+        # .content h1:first-child is used in screen.css
+        filename_anchor = %Q(<span id="#{File.basename(markdown_file)}"></span>)
+        markdown        = File.read(markdown_file).strip
+
+        lines    = markdown.split "\n"
+        markdown = ''
+
+        matched = false
+        lines.each do |line|
+
+          # insert anchor after matching the first h1
+          if !matched && line.strip.match(/^#[^#]/)
+            # ' # # hi'.split('#', 2)
+            # => [" ", " # hi"]
+            # must strip or '-' will be prefixed to the id by Slate
+            after_first_hash = line.split('#', 2).last.strip
+
+            # <h1 id="credits"><span id="credits.md"></span>Credits</h1>
+            markdown         += "## #{filename_anchor}#{after_first_hash}\n\n"
+            matched          = true
+          else
+            markdown += line + "\n"
+          end
+        end
+
+        markdown = process_github_links markdown, markdown_file
+
+        data += "\n\n" + markdown + "\n\n"
+      end
+    end
+
+    data.gsub! '<expand_table>', '<p class="expand_table"></p>'
+
+    index_file = File.expand_path(File.join(output_folder, 'index.md'))
+
+    File.open(index_file, 'w') do |f|
+      f.write header + data
+    end
+  end
+
+end
+
+def markdown_old opts={}
+
+  folder_to_glob = validate_dir opts[:glob]
+  output_folder = validate_dir opts[:output]
   data = ''
-
+  yaml_settings_data = YAML.load_file "api-docs.yml"
   files = file_glob File.expand_path(File.join(folder_to_glob, '**', '*.md'))
-  files = order_files files
-
+  files = order_list(yaml_settings_data["file-order-older-versions"], files, yaml_settings_data["ignore-files-older-versions"])
   files.each do |markdown_file|
     # anchor must be placed after the first h1 otherwise the css will break
     # .content h1:first-child is used in screen.css

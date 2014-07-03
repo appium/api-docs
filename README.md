@@ -83,3 +83,11 @@ Thanks to the following people who have submitted pull requests:
 
 - [@chrissrogers](https://github.com/chrissrogers)
 - [@bootstraponline](https://github.com/bootstraponline)
+
+Specific to appium docs
+-------------------------
+
+- `rake md[/../appium/docs/en]` for creating a single markdown from documents of appium.
+- `rake build`
+- `bundle exec middleman server` to start test server
+-  For appium specific settings and options related to markdowns see api-docs.yml
