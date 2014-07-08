@@ -22,6 +22,7 @@ folder-map:
       - running-on-osx.md
       - running-on-windows.md
       - running-on-linux.md
+      - android-setup.md
       - android-hax-emulator.md
       - ios-deploy.md
       - troubleshooting.md
