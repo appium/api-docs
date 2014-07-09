@@ -176,12 +176,12 @@ def markdown opts={}
         matched = false
         lines.each do |line|
 
-          # insert anchor after matching the first h1
-          if !matched && line.strip.match(/^#[^#]/)
+          # insert anchor after matching the first h2
+          if !matched && line.strip.match(/^##[^##]/)
             # ' # # hi'.split('#', 2)
             # => [" ", " # hi"]
             # must strip or '-' will be prefixed to the id by Slate
-            after_first_hash = line.split('#', 2).last.strip
+            after_first_hash = line.split('##', 2).last.strip
 
             # <h1 id="credits"><span id="credits.md"></span>Credits</h1>
             markdown         += "## #{filename_anchor}#{after_first_hash}\n\n"
@@ -198,6 +198,7 @@ def markdown opts={}
     end
 
     data.gsub! '<expand_table>', '<p class="expand_table"></p>'
+    data.gsub! /]\s*\(\/docs\/en\/.*\//, '](#'
 
     index_file = File.expand_path(File.join(output_folder, 'index.md'))
 
