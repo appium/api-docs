@@ -387,7 +387,7 @@ html, body {
 
     code {
       background-color: rgba(0,0,0,0.05);
-      padding: 3px;
+      padding: 3px 0.5em;
       border-radius: 3px;
       @extend %break-words;
       @extend %code-font;
@@ -473,6 +473,7 @@ html, body {
 
   pre {
     @extend %code-font;
+    padding: 0 $main-padding;
   }
 
   blockquote {
