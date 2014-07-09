@@ -13,6 +13,7 @@ folder-map:
     label: About Appium
     file-order:
       - intro.md
+      - README.md
       - appium-clients.md
   appium-setup:
     label: Setting up Appium
@@ -46,6 +47,10 @@ folder-map:
         - grid.md
         - hybrid.md
         - migrating-to-1-0.md
+  appium-gui:
+    label: Appium GUI
+        - dot-app.md
+        - dot-exe.md
 
 file-order-older-versions:
       - intro.md
