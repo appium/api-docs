@@ -48,7 +48,8 @@ folder-map:
         - hybrid.md
         - migrating-to-1-0.md
   appium-gui:
-    label: Appium GUI
+      label: Appium GUI
+      file-order:
         - dot-app.md
         - dot-exe.md
 
