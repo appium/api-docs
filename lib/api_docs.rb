@@ -199,7 +199,14 @@ def markdown opts={}
 
     data.gsub! '<expand_table>', '<p class="expand_table"></p>'
     data.gsub! /]\s*\(\/docs\/en\/.*\//, '](#'
-
+    data.gsub!('](/docs/en/)', '](#)')
+    # ```center code_block ``` to <p class=\"centercode\"><code>code_block</code></p>
+    # to center align code blocks which are marked as center in markdown
+    data.gsub!(/^([ \t]*)``` ?center?\r?\n(.+?)\r?\n\1(```)[ \t]*\r?$/m) do
+      m_indent = $1
+      m_code   = $2
+      "#{m_indent}<p class=\"centercode\"><code>#{m_code}</code></p>"
+    end
     index_file = File.expand_path(File.join(output_folder, 'index.md'))
 
     File.open(index_file, 'w') do |f|
