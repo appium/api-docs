@@ -1,4 +1,5 @@
 require 'yaml'
+require 'escape_utils'
 
 
 def header
@@ -205,6 +206,8 @@ def markdown opts={}
     data.gsub!(/^([ \t]*)``` ?center?\r?\n(.+?)\r?\n\1(```)[ \t]*\r?$/m) do
       m_indent = $1
       m_code   = $2
+      m_code   = EscapeUtils.escape_html(m_code)
+
       "#{m_indent}<p class=\"centercode\"><code>#{m_code}</code></p>"
     end
     index_file = File.expand_path(File.join(output_folder, 'index.md'))
