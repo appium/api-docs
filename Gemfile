@@ -2,7 +2,10 @@
 # the following line to use "https"
 source 'http://rubygems.org'
 
-gem "middleman", "~>3.3.0"
+gem "middleman", "~> 3.3.0"
+
+# used by ```center logic
+gem 'escape_utils', '~> 1.0.1'
 
 # For syntax highlighting
 gem "middleman-syntax"
