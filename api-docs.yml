@@ -26,6 +26,7 @@ folder-map:
       - android-setup.md
       - android-hax-emulator.md
       - ios-deploy.md
+      - parallel_tests.md
       - troubleshooting.md
   writing-running-appium:
     label: Running Appium tests
@@ -46,6 +47,8 @@ folder-map:
       file-order:
         - grid.md
         - hybrid.md
+        - settings.md
+        - ios-webkit-debug-proxy.md
         - migrating-to-1-0.md
   appium-gui:
       label: Appium GUI
