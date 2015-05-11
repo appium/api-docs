@@ -201,6 +201,9 @@ def markdown opts={}
     data.gsub! '<expand_table>', '<p class="expand_table"></p>'
     data.gsub! /]\s*\(\/docs\/en\/.*\//, '](#'
     data.gsub!('](/docs/en/)', '](#)')
+    #Replacing broken links.
+    data.gsub!('https://dvcs.w3.org/hg/webdriver/raw-file/tip/webdriver-spec.html','https://w3c.github.io/webdriver/webdriver-spec.html')
+    data.gsub!('https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/_index.html','https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/')
     # ```center code_block ``` to <p class=\"centercode\"><code>code_block</code></p>
     # to center align code blocks which are marked as center in markdown
     data.gsub!(/^([ \t]*)``` ?center?\r?\n(.+?)\r?\n\1(```)[ \t]*\r?$/m) do
@@ -260,6 +263,8 @@ def markdown_old opts={}
   end
 
   data.gsub! '<expand_table>', '<p class="expand_table"></p>'
+  data.gsub!('https://dvcs.w3.org/hg/webdriver/raw-file/tip/webdriver-spec.html','https://w3c.github.io/webdriver/webdriver-spec.html')
+  data.gsub!('https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/_index.html','https://developer.apple.com/library/ios/documentation/DeveloperTools/Reference/UIAutomationRef/')
 
   index_file = File.expand_path(File.join(output_folder, 'index.md'))
 
