@@ -82,6 +82,7 @@ file-order-older-versions:
 
 ignore-files-older-versions:
       - grunt.md
+      - gulp.md
       - how-to-write-docs.md
       - credits.md
       - style-guide.md
