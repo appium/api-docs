@@ -32,6 +32,7 @@ folder-map:
     label: Running Appium tests
     file-order:
       - server-args.md
+      - default-capabilities-arg.md
       - caps.md
       - finding-elements.md
       - mobile-web.md
