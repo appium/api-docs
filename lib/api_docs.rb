@@ -57,7 +57,7 @@ def process_github_links markdown, markdown_file_path
     result = "#{leading_space}[#{link_text}](#{link_target})"
 
     no_slash = !link_target.include?('/')
-    not_link_to_self = link_target != '#'
+    not_link_to_self = !link_target.start_with?('#')
 
     if link_target && no_slash && not_link_to_self
       ext = File.extname link_target
