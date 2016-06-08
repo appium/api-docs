@@ -51,6 +51,7 @@ folder-map:
         - settings.md
         - ios-webkit-debug-proxy.md
         - migrating-to-1-0.md
+        - cross-domain-iframes.md
   appium-gui:
       label: Appium GUI
       file-order:
